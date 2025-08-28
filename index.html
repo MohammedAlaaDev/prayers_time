@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مواقيت الصلاة</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Tahoma", sans-serif;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .page {
+            position: relative;
+            min-height: 100vh;
+            background: url("./assets/mosque.jpeg") no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .page::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            padding: 50px 15px;
+            margin: 0 auto;
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+        }
+
+        @media(max-width:767px) {
+            .container {
+                padding-bottom: 200px;
+            }
+        }
+
+        .site-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .site-title h1 {
+            font-size: 42px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .time-line {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .time-line::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -300%;
+            height: 6px;
+            width: 1000%;
+            background-color: white;
+            transform: translate(-50% -50%);
+            border-radius: 10px;
+            box-shadow: 0 0 25px white;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+
+        .timeline-grid img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .heading {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .heading h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .heading .day {
+            font-size: 18px;
+            opacity: 0.9;
+            color: white;
+        }
+
+        .prayer-times {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .time {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .time h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .time span {
+            font-size: 18px;
+            color: white;
+        }
+
+        .time::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 100%;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 0 30px 10px currentColor;
+        }
+
+        .time:nth-child(1)::before {
+            background: #edb48a;
+            color: #edb48a;
+        }
+
+        .time:nth-child(2)::before {
+            background: #a07546;
+            color: #a07546;
+        }
+
+        .time:nth-child(3)::before {
+            background: #c5a33f;
+            color: #c5a33f;
+        }
+
+        .time:nth-child(4)::before {
+            background: #5b7490;
+            color: #5b7490;
+        }
+
+        .time:nth-child(5)::before {
+            background: #923d33;
+            color: #923d33;
+        }
+
+        .time:nth-child(6)::before {
+            background: #4d3a40;
+            color: #4d3a40;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prayer-times {
+                grid-template-columns: 1fr;
+            }
+
+            .time-line::before {
+                width: 6px;
+                height: 100%;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+        }
+
+        .selection {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .selection select {
+            border: 2px solid white;
+            outline: none;
+            padding: 15px 0;
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+            font-weight: bold;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .selection select option {
+            background: #060d2b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="container">
+
+            <div class="site-title">
+                <h1>مواقيت الصلاة</h1>
+            </div>
+
+            <div class="heading">
+                <h2 id="heading-name">مكة المكرمة</h2>
+                <div class="day">
+                    <span id="day">الجمعة</span> - <span id="date">29 Aug 2025</span>
+                </div>
+            </div>
+
+            <div class="time-line">
+                <div class="timeline-grid">
+                    <img src="assets/fajr.png" alt="الفجر">
+                    <img src="assets/shorouk.png" alt="الشروق">
+                    <img src="assets/dhuhr.png" alt="الظهر">
+                    <img src="assets/asr.png" alt="العصر">
+                    <img src="assets/maghrib.png" alt="المغرب">
+                    <img src="assets/ishaa.png" alt="العشاء">
+                </div>
+            </div>
+
+            <div class="prayer-times">
+                <div class="time">
+                    <h2>الفجر</h2>
+                    <span id="fajr">04:45</span>
+                </div>
+                <div class="time">
+                    <h2>الشروق</h2>
+                    <span id="shorouk">06:03</span>
+                </div>
+                <div class="time">
+                    <h2>الظهر</h2>
+                    <span id="dhuhr">12:22</span>
+                </div>
+                <div class="time">
+                    <h2>العصر</h2>
+                    <span id="asr">15:47</span>
+                </div>
+                <div class="time">
+                    <h2>المغرب</h2>
+                    <span id="maghrib">18:40</span>
+                </div>
+                <div class="time">
+                    <h2>العشاء</h2>
+                    <span id="ishaa">20:10</span>
+                </div>
+            </div>
+
+            <div class="selection">
+                <select name="" id="select">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
